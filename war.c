@@ -31,7 +31,7 @@
 
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
-int main() {
+//int main() {
     // 1. Configuração Inicial (Setup):
     // - Define o locale para português.
     // - Inicializa a semente para geração de números aleatórios com base no tempo atual.
@@ -51,8 +51,8 @@ int main() {
     // 3. Limpeza:
     // - Ao final do jogo, libera a memória alocada para o mapa para evitar vazamentos de memória.
 
-    return 0;
-}
+   // return 0;
+//}
 
 // --- Implementação das Funções ---
 
@@ -96,3 +96,56 @@ int main() {
 
 // limparBufferEntrada():
 // Função utilitária para limpar o buffer de entrada do teclado (stdin), evitando problemas com leituras consecutivas de scanf e getchar.
+
+#include <stdio.h>
+#include <string.h>
+
+#define QTD_TERRITORIOS 5
+
+// definnição da struct 
+typedef struct 
+{
+    char nome[50];
+    char corExercito[30];
+    int numeroTropas;
+} Territorio;
+
+
+int main() {
+    Territorio territorios[QTD_TERRITORIOS];
+    int i;
+
+    printf("=== Cadastro incial dos territorios ===\n");
+
+    for (int i = 0; i < QTD_TERRITORIOS; i++) 
+    {
+        printf("Territorio %d\n", i + 1);
+
+        printf("Nome: ");
+        fgets(territorios[i].nome, sizeof(territorios[i].nome), stdin);
+        territorios[i].nome[strcspn(territorios[i].nome, "\n")] = '\0'; // remove o \n
+
+        printf("Cor do exercito: ");
+        fgets(territorios[i].corExercito, sizeof(territorios[i].nome), stdin);
+        territorios[i].corExercito[strcspn(territorios[i].corExercito, "\n")] = '\0';
+
+        printf("Números de tropas: ");
+        scanf("%d", &territorios[i].numeroTropas);
+        getchar(); //consome o \n deixado pelo scanf
+
+        printf("\n");       
+    }
+
+    printf("\n=== Estado atual do mapa ===\n");
+    for (int i = 0; i < QTD_TERRITORIOS; i++);
+    {
+        printf("\nTerritorio %d\n", i + 1);
+        printf("Nome: %s\n", territorios[i].nome);
+        printf("Cor Do Exército: %s\n", territorios[i].corExercito);
+        printf("Número de tropas: %d\n", territorios[i].numeroTropas);
+    }
+    
+    return 0;
+
+}
+
